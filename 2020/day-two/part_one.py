@@ -113,6 +113,31 @@ def part_one_validation_for(a_password_meta_dataclass: PasswordMeta) -> bool:
             return True
         else:
             return False
+
+def part_two_validation_for(a_password_meta_dataclass: PasswordMeta) -> bool:
+    """
+    Part Two validation in which we check to see that the character exists at either the lower_bound or upper_bound.
+    If it does, return True else return False.
+    
+    :param a_password_meta_dataclass -> ``PasswordMeta``: a PasswordMeta dataclass instance. Same properties necessary as defined on line 94 (within part_one_validation_for()).
+    :returns ``bool``: whether or not the conditions were met.
+    """
+    if not isinstance(a_password_meta_dataclass, PasswordMeta):
+        raise ValueError("Invalid input, expected a PasswordMeta class instance.")
+    else:
+        lower_bound = a_password_meta_dataclass.lower_bound
+        upper_bound = a_password_meta_dataclass.upper_bound
+        character = a_password_meta_dataclass.character
+        password = a_password_meta_dataclass.password
+        if password[lower_bound - 1] != password[upper_bound - 1]:
+            if password[lower_bound - 1] == character or password[upper_bound - 1] == character:
+                print(password[lower_bound - 1], password[upper_bound - 1])
+                return True
+            else:
+                return False
+        else:
+            return False
+
 def main():
     with open("puzzle-input.txt", "r") as f:
         file_contents = f.read()
@@ -126,6 +151,8 @@ def main():
     
     return sum([
         part_one_validation_for(pw) for pw in input_row_instances
+    ]), sum([
+        part_two_validation_for(pw) for pw in input_row_instances
     ])
     
 
