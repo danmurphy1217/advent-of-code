@@ -129,12 +129,11 @@ def part_two_validation_for(a_password_meta_dataclass: PasswordMeta) -> bool:
         upper_bound = a_password_meta_dataclass.upper_bound
         character = a_password_meta_dataclass.character
         password = a_password_meta_dataclass.password
-        if password[lower_bound - 1] != password[upper_bound - 1]:
-            if password[lower_bound - 1] == character or password[upper_bound - 1] == character:
-                print(password[lower_bound - 1], password[upper_bound - 1])
-                return True
-            else:
-                return False
+        if (password[lower_bound - 1] != password[upper_bound - 1]) and \
+            (password[lower_bound - 1] == character or password[upper_bound - 1] == character):
+            
+            print(password[lower_bound - 1], password[upper_bound - 1])
+            return True
         else:
             return False
 
